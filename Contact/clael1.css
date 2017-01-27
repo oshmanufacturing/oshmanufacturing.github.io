@@ -1,0 +1,40 @@
+#pagediv{
+
+display: block;
+margin-left: auto;
+margin-right: auto;
+background-color:transparent;
+width:100%; 
+height:auto;
+min-height:500px;
+position:relative;
+margin:auto;
+
+
+
+}
+
+body{
+width:85%;
+background-color:gray;
+margin:auto;
+min-width:900px;
+
+}
+
+#bottomnametag{
+
+display: block;
+margin-left: auto;
+margin-right: auto;
+
+width:90%; 
+position:relative;
+
+color:white;
+height:20px;
+width:90%;
+text-align:center;
+
+
+}

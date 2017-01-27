@@ -1,4 +1,228 @@
 <html>
-<h1> Welcome to OSH Manufacturing </h1>
+<head>
+<title> Jensen Dynamics </title>
+<link rel="stylesheet" href="jensendyn.css" type="text/css">
+ <link rel="stylesheet" type="text/css" href="style6.css" />
+<meta name="google-site-verification" content="xzaUImpvrXE4bKxI32MHNYtdfDoBZSDICHGytpQnXmI" />
 
+<meta name="description" content="Electronics for the Future">
+<meta name="keywords" content="Data Capture Devices, Electronics, Arduino, Makers, Electrical Engineering">
+<meta name="author" content="Jensen Dynamics">
+
+
+<style> #fileselect{display: none;} #vs_iframe{display: none;}
+
+#weight{color:red; font-size: 20px;}
+#subtotal{color:red; font-size: 20px;}
+#paypalbutton{display: none;}
+#weightp{display: none;}
+#subtotalp{display: none;}
+p{
+  color:white;
+
+}
+
+p2{
+  color:white;
+  font-size: 20px;
+}
+label{
+  cursor: pointer;
+}
+
+label:hover{
+}
+
+</style>
+<script>
+
+
+
+function load_local_file(f)
+{
+  document.getElementById('vs_iframe').contentWindow.postMessage({msg_type:'load', file:f}, '*');
+
+  document.getElementById('vs_iframe').style.display="block";
+  document.getElementById('weightp').style.display="block";
+  document.getElementById('subtotalp').style.display="block";
+  document.getElementById('paypalbutton').style.display="block";
+}
+
+</script>
+
+</head>
+
+
+
+<div id="jensenlogo"> &nbsp <a class="navbar2link"  href="/">American Prototypes Inc</a> </div>
+ <div id="jensenlogoright">
+
+
+</div>
+
+<div>
+<span class="navbar2">
+
+&nbsp
+<a class="navbar2link" href="Products">Services</a>
+&nbsp
+<a class="navbar2link" href="Products">About</a>
+&nbsp
+
+<a class="navbar2link" href="Contact">Contact</a>
+
+
+</span>
+</div>
+
+
+
+
+
+<body>
+  <input type="file" id="fileselect" onchange="load_local_file(this.files[0]);"/>
+
+
+
+<div id="prepagediv" style="width:700px; margin-left:auto; margin-right:auto">
+<div id="imageswipe" style="padding 60px; margin-left:auto: margin-right:auto;"  >
+<img src="banner1.jpg"  width="100%"   ></img>
+<span class="overimagetext" style="text-align:center; width:100%; height:100px;"> <br>3d Printed Prototypes </span>
+</div>
+</div>
+
+
+
+<div id="pagediv" style="width:800px">
+  <span  class="overimagetext" width="500px"style="text-align:center; margin:1px,1px,1px,1px;">
+
+    <label for="fileselect"> Upload Your Design (File Type: STL)</label>
+  </span>
+</a>
+
+
+
+<p style="color:white">
+Welcome to American Prototyping. We provide low cost, fast turnaround 3d printing services for prototypes.
+
+Price Guide:  PLA: $60/kg
+ABS: $65/kg
+How we calculate cost: We calculate cost based on weight of your part.
+For instance an Average 4"x4"x1" part weighs ~100g so the cost to manufactre would be $6.00 in PLA or $6.50 in ABS. Shipping cost is calculated by weight and type of shipping selected.
+
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</p>
+
+<div style="width: 700px ;margin-left: auto ; margin-right: auto ;">
+<iframe id="vs_iframe" src="http://www.viewstl.com/?embedded&color=black&bgcolor=white&noborder=yes&edges=no" style="border:0;margin:0;width:100%;height:70%;"></iframe>
+
+</div>
+
+<div>
+
+   <br>
+
+    <p2 id="weightp" style="color:white"> Your quote is for: </p2> <div id="weight"> </div>
+    <p2 id= "subtotalp" style="color:white"> Your Subtotal is:</p2> <div id="subtotal"> </div>
+
+
+   <br><br>
+
+  <form style="width: 500px ;margin-left: auto ; margin-right: auto ;" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" id="paypalbutton">
+    <input type="hidden" name="cmd" value="_xclick">
+    <input type="hidden" name="business" value="jensendynamics1@gmail.com">
+    <input type="hidden" name="item_name" value="test">
+    <input id="amt_id" type="hidden" name="amount" value="1">
+    <input type="hidden" name="currency_code" value="USD">
+    <input type="hidden" name="no_shipping" value="2">
+    <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+    <input type="image" src="Images/order.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+    <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+  </form>
+
+</div>
+  <script>
+  document.getElementById('vs_iframe').onload=function()
+  {
+
+	document.getElementById('vs_iframe').contentWindow.postMessage({msg_type:'get_info'}, '*');
+
+  window.onmessage = function(e)
+  {
+
+  if ((e.origin=="http://www.viewstl.com")&&(e.data.msg_type))
+  {
+    if (e.data.msg_type=='info')
+    {
+      volume =e.data.volume;
+      //alert("Model filename: "+e.data.filename);
+    //  alert("Volume: "+e.data.volume);
+      //alert("Color: "+e.data.color);
+    //  alert("x: "+e.data.x);
+      //alert("y: "+e.data.y);
+      //alert("z: "+e.data.z);
+    //  alert("triangles: "+e.data.triangles);
+    //  alert("area: "+e.data.area);
+
+
+
+
+
+
+      var weight = e.data.volume*0.00125;
+      var money = "22.00";
+
+      var price = document.getElementById('amt_id');
+      price.value=weight*(60*0.001);
+
+      var subtotal = document.getElementById('subtotal');
+      subtotal.innerHTML="$"+(weight*(60*0.001)).toFixed(2);
+
+      var w = document.getElementById('weight');
+      w.innerHTML=weight.toFixed(2) + " g";
+
+
+
+
+
+
+    }
+  }
+  };
+
+
+
+
+
+
+
+  }
+
+
+  </script>
+
+
+
+
+
+</div>
+
+
+
+   <br><br>
+      <br><br>
+         <br><br>
+            <br><br>
+               <br><br>
+
+<div id="bottomnametag">
+&copy 2017 American Prototypes inc Louisville KY &nbsp; | Legal | Privacy | Contact
+</div>
+
+</body>
 </html>

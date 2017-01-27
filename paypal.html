@@ -1,0 +1,109 @@
+<html>
+  <head>
+
+    <style> #vs_iframe{display: none;}</style>
+    <script>
+    function load_local_file(f)
+    {
+    	document.getElementById('vs_iframe').contentWindow.postMessage({msg_type:'load', file:f}, '*');
+
+      document.getElementById('vs_iframe').style.display="block";
+    }
+
+    </script>
+
+    </head>
+  <body>
+
+
+<iframe id="vs_iframe" src="http://www.viewstl.com/?embedded&color=black&bgcolor=white&noborder=yes&edges=no" style="border:0;margin:0;width:50%;height:50%;"></iframe>
+
+
+
+<input type="file" value="internal file" id="fileselect" onchange="load_local_file(this.files[0]);">
+
+
+
+<br>
+    Your quote is for <div id="weight"> </div>
+    Your Subtotal is: <div id="subtotal"> </div>
+  <br><br>
+
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    <input type="hidden" name="cmd" value="_xclick">
+    <input type="hidden" name="business" value="jensendynamics1@gmail.com">
+    <input type="hidden" name="item_name" value="test">
+    <input id="amt_id" type="hidden" name="amount" value="1">
+    <input type="hidden" name="currency_code" value="USD">
+    <input type="hidden" name="no_shipping" value="2">
+    <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+    <input type="image" src="http://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+    <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+  </form>
+
+
+  <script>
+  document.getElementById('vs_iframe').onload=function()
+  {
+
+	document.getElementById('vs_iframe').contentWindow.postMessage({msg_type:'get_info'}, '*');
+
+  window.onmessage = function(e)
+  {
+
+  if ((e.origin=="http://www.viewstl.com")&&(e.data.msg_type))
+  {
+    if (e.data.msg_type=='info')
+    {
+      volume =e.data.volume;
+      //alert("Model filename: "+e.data.filename);
+    //  alert("Volume: "+e.data.volume);
+      //alert("Color: "+e.data.color);
+    //  alert("x: "+e.data.x);
+      //alert("y: "+e.data.y);
+      //alert("z: "+e.data.z);
+    //  alert("triangles: "+e.data.triangles);
+    //  alert("area: "+e.data.area);
+
+
+
+
+
+
+      var weight = e.data.volume*0.00125;
+      var money = "22.00";
+
+      var price = document.getElementById('amt_id');
+      price.value=weight*(60*0.001);
+
+      var subtotal = document.getElementById('subtotal');
+      subtotal.innerHTML="$"+(weight*(60*0.001)).toFixed(2);
+
+      var w = document.getElementById('weight');
+      w.innerHTML=weight.toFixed(2) + " g";
+
+
+
+
+
+
+    }
+  }
+  };
+
+
+
+
+
+
+
+  }
+
+
+  </script>
+
+
+
+
+    </body>
+  </html>
